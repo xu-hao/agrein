@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.."
+python -m pytest -q
+python scripts/check-plugins.py
+python -m sphinx -W --keep-going -b html docs docs/_build/html

@@ -1,0 +1,14 @@
+{
+  "name": "agrein",
+  "description": "Contributor workflows for issue and epic tracking, isolated worktrees, concrete escalation, and session handoffs.",
+  "owner": {
+    "name": "agrein contributors"
+  },
+  "plugins": [
+    {
+      "name": "agrein",
+      "source": "./",
+      "description": "Contributor workflows for issue and epic tracking, isolated worktrees, concrete escalation, and session handoffs."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+# Contributor tooling only: agrein is a native skill plugin, not a Python package.
+[dependency-groups]
+dev = ["pytest>=8", "PyYAML>=6", "sphinx>=8", "myst-parser>=4", "furo"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-config --strict-markers"
