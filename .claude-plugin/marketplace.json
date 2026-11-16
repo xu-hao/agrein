@@ -1,6 +1,6 @@
 {
   "name": "agrein",
-  "description": "Contributor workflows for issue and epic tracking, isolated worktrees, concrete escalation, and session handoffs.",
+  "description": "Contributor workflows for isolated ticket delivery, native epic queues, bug investigation, and concrete owner escalations.",
   "owner": {
     "name": "agrein contributors"
   },
@@ -8,7 +8,7 @@
     {
       "name": "agrein",
       "source": "./",
-      "description": "Contributor workflows for issue and epic tracking, isolated worktrees, concrete escalation, and session handoffs."
+      "description": "Contributor workflows for isolated ticket delivery, native epic queues, bug investigation, and concrete owner escalations."
     }
   ]
 }

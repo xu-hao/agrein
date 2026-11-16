@@ -29,25 +29,23 @@ user/project scope with the host's supported options. Reopen the agent if needed
 
 ## Request a workflow
 
-| Host | Ticket workflow | Handoff workflow |
-| --- | --- | --- |
-| Codex | `$ticket-and-epic` | `$handoff-and-escalation` |
-| Claude Code | `/agrein:ticket-and-epic` | `/agrein:handoff-and-escalation` |
-| Antigravity | `/ticket-and-epic` | `/handoff-and-escalation` |
+| Host | Ticket delivery | Epic queue | Bug investigation | Owner escalation |
+| --- | --- | --- | --- | --- |
+| Codex | `$ticket-delivery` | `$epic-queue` | `$bug-investigation` | `$owner-escalation` |
+| Claude Code | `/agrein:ticket-delivery` | `/agrein:epic-queue` | `/agrein:bug-investigation` | `/agrein:owner-escalation` |
+| Antigravity | `/ticket-delivery` | `/epic-queue` | `/bug-investigation` | `/owner-escalation` |
 
-For example: “Use ticket-and-epic to investigate this change and organize its epic
-queue, then use handoff-and-escalation for any unsettled product rule and the final
-handoff.” Requesting a workflow does not grant permission for a release or deployment.
+Requesting a workflow does not grant permission for a release or deployment.
 
 Add this trigger to the consuming project's `AGENTS.md`, or its native equivalent:
 
 ```text
-Use the installed agrein ticket-and-epic skill before changing code, documentation,
-infrastructure, or live state, and when planning or executing an epic queue.
-Use handoff-and-escalation for unsettled owner product/policy rulings, operation
-approval gates, and the final handoff after any changed-state exchange.
-Follow canonical project contracts and explicit owner authorization. An assigned
-leaf worker executes its ticket directly without recursively delegating it.
+Use the installed agrein skills: ticket-delivery before changing code, docs,
+config, infrastructure, or live state; epic-queue when decomposing multi-ticket
+work or coordinating subagent workers; bug-investigation before fixing defects or
+failing checks; and owner-escalation for unsettled product/policy rulings, live
+operation approvals, and decision handoffs. An assigned leaf worker implements
+its ticket directly without recursively delegating it.
 ```
 
 ## Inspect and remove

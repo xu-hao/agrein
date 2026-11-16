@@ -8,7 +8,7 @@ import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL_COUNT = 2
+SKILL_COUNT = 4
 
 
 def run(*command):

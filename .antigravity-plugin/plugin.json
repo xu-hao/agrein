@@ -2,7 +2,7 @@
   "$schema": "https://antigravity.google/schemas/v1/plugin.json",
   "name": "agrein",
   "version": "0.1.0",
-  "description": "Contributor workflows for issue and epic tracking, isolated worktrees, concrete escalation, and session handoffs.",
+  "description": "Contributor workflows for isolated ticket delivery, native epic queues, bug investigation, and concrete owner escalations.",
   "author": {
     "name": "agrein contributors"
   },

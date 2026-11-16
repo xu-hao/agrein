@@ -15,7 +15,12 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILLS = {"ticket-and-epic", "handoff-and-escalation"}
+SKILLS = {
+    "ticket-delivery",
+    "epic-queue",
+    "bug-investigation",
+    "owner-escalation",
+}
 MANIFESTS = ("plugin.json", ".claude-plugin/plugin.json", ".antigravity-plugin/plugin.json")
 SKILL_DOCS = sorted((ROOT / "skills").rglob("*.md"))
 
@@ -152,7 +157,10 @@ if strict:
     assert set(p.name for p in root.iterdir()) == {".antigravity-plugin", "skills"}
     assert (root / ".antigravity-plugin" / "plugin.json").is_file()
     assert {p.parent.name for p in root.glob("skills/*/SKILL.md")} == {
-        "ticket-and-epic", "handoff-and-escalation"
+        "ticket-delivery",
+        "epic-queue",
+        "bug-investigation",
+        "owner-escalation",
     }
     if case == "strict-exit":
         sys.exit(8)
@@ -168,9 +176,9 @@ if case == "strict-warning" and strict:
     findings = [{"severity": "warning", "message": "ignored payload field"}]
 if case == "strict-error" and strict:
     findings = [{"severity": "error", "message": "rejected payload"}]
-count = 2
+count = 4
 if (case == "checkout-count" and not strict) or (case == "strict-count" and strict):
-    count = 1
+    count = 3
 print(json.dumps({"components": {"skills": count}, "findings": findings}))
 '''
 

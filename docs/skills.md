@@ -1,21 +1,35 @@
 # Skills and native packaging
 
-Both workflows use Agent Skills Markdown with YAML `name` and `description`
-frontmatter. Their progressive references contain operational detail:
+All four workflows use Agent Skills Markdown with YAML `name` and `description`
+frontmatter, keeping each skill scoped to one activation trigger while pushing
+operational detail into progressive references:
 
-- [ticket-and-epic](https://github.com/xu-hao/agrein/blob/main/skills/ticket-and-epic/SKILL.md)
-  tracks changes before execution, attaches children to native owning epics,
-  investigates the full queue, and assigns dedicated ticket workers. It requires
-  worktree isolation, evidence before bug fixes, strict internal contracts,
-  bounded retries with infrastructure parking, and observable behavioral checks.
-- [Delegation and worktrees](https://github.com/xu-hao/agrein/blob/main/skills/ticket-and-epic/references/delegation-and-worktrees.md)
-  explains native sub-issue IDs, ticket-scoped paths, scheduling, and cleanup.
-- [handoff-and-escalation](https://github.com/xu-hao/agrein/blob/main/skills/handoff-and-escalation/SKILL.md)
-  reserves owner questions for unsettled product/policy rules, shows exact
-  before/after applications, distinguishes merge gates from live-operation
-  approval, and ends changed-state exchanges with four prescribed sections.
-- [Escalation and handoffs](https://github.com/xu-hao/agrein/blob/main/skills/handoff-and-escalation/references/escalation-and-handoffs.md)
-  provides a worked single-select question and operation approval transitions.
+- [ticket-delivery](https://github.com/xu-hao/agrein/blob/main/skills/ticket-delivery/SKILL.md)
+  tracks single-ticket work before editing, isolates execution in a dedicated
+  `git worktree`, captures complete test logs without truncating pipes, lands
+  with `Closes #N`, cleans up safely with `git cherry`, and closes with a concise
+  handoff.
+- [Worktrees and cleanup](https://github.com/xu-hao/agrein/blob/main/skills/ticket-delivery/references/worktrees-and-cleanup.md)
+  covers ticket-scoped isolation paths, full-log capture, and squash-safe cleanup.
+- [epic-queue](https://github.com/xu-hao/agrein/blob/main/skills/epic-queue/SKILL.md)
+  wires native GitHub parent/sub-issue relationships, triages the full queue
+  upfront to batch owner questions, runs uncertain or ruling-bearing tickets
+  sequentially in the foreground, and dispatches decision-free subtickets to
+  dedicated workers with delta-only handbacks.
+- [Native GitHub sub-issues and worker briefs](https://github.com/xu-hao/agrein/blob/main/skills/epic-queue/references/github-sub-issues.md)
+  shows numeric `.id` attachment, queue buckets, and worker brief fields.
+- [bug-investigation](https://github.com/xu-hao/agrein/blob/main/skills/bug-investigation/SKILL.md)
+  measures and reproduces defects before editing, steps back to the general
+  problem class, proves pre-existing failure claims against `origin/main`, fixes
+  invalid internal producers rather than consumer fallbacks, and locks in a
+  failing behavioral test first.
+- [owner-escalation](https://github.com/xu-hao/agrein/blob/main/skills/owner-escalation/SKILL.md)
+  reserves owner prompts for unsettled product/policy rules, presents standalone
+  jargon-free choices with exact before/after states and option costs, enforces
+  per-operation live approval gates, and structures four-section decision handoffs.
+- [Worked rulings, approval gates, and handoffs](https://github.com/xu-hao/agrein/blob/main/skills/owner-escalation/references/worked-rulings-and-gates.md)
+  provides a complete worked question, the live-operation approval table, and
+  handoff examples.
 
 ## One payload, three wrappers
 
@@ -26,7 +40,7 @@ frontmatter. Their progressive references contain operational detail:
 | Antigravity | `.antigravity-plugin/plugin.json` | `skills/*/SKILL.md` |
 
 The marketplace source `./` resolves to the repository root. Default skill discovery
-loads exactly the same two folders for every host; no per-host skill path override
+loads the exact same four folders for every host; no per-host skill path override
 is needed. `CLAUDE.md` is a contributor-instruction symlink to `AGENTS.md`, not another
 skill or plugin payload. Manifests share the plugin name and release version.
 
@@ -38,7 +52,7 @@ and [Antigravity plugin guide](https://antigravity.google/docs/build-plugins).
 ## Capability and authorization boundaries
 
 Native clients own discovery and activation. Installation alone does not guarantee
-that an agent invokes either skill; use the project trigger in [Quickstart](quickstart.md).
+that an agent invokes a skill; use the project trigger in [Quickstart](quickstart.md).
 These instructions do not enforce actions at the host's tool boundary, create a
 scheduler, add a GitHub integration, or grant new permissions.
 
@@ -50,4 +64,4 @@ can run concurrently; ruling-bearing investigations run sequentially in the fore
 
 Explicit owner instructions and canonical project contracts govern execution.
 Read-only work, ticket maintenance, and workstation setup need no change ticket.
-Changed-state exchanges need the four-section handoff; read-only answers do not.
+Changed-state exchanges end with a handoff; read-only answers finish directly.
