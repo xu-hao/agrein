@@ -1,0 +1,10 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "agrein",
+  "version": "0.1.0",
+  "description": "Contributor workflows for isolated ticket delivery, native epic queues, bug investigation, and concrete owner escalations.",
+  "author": {
+    "name": "agrein contributors"
+  },
+  "repository": "https://github.com/xu-hao/agrein"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "agrein",
+  "description": "Contributor workflows for isolated ticket delivery, native epic queues, bug investigation, and concrete owner escalations.",
+  "owner": {
+    "name": "agrein contributors"
+  },
+  "plugins": [
+    {
+      "name": "agrein",
+      "source": "./",
+      "description": "Contributor workflows for isolated ticket delivery, native epic queues, bug investigation, and concrete owner escalations."
+    }
+  ]
+}
