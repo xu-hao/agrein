@@ -1,0 +1,10 @@
+# Tracked repository profile managed by gardenia.
+gate = "bash scripts/check"
+cpu = 2
+memory_gb = 4
+tmpfs_gb = 2
+no_overflow = true
+routing = "agroute"
+agcoord = "auto"
+docs_exemption = true
+claude_symlink = true
