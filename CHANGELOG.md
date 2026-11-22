@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+- Update `epic-queue` and its GitHub sub-issue reference to derive explicit
+  dependency DAGs from contract, code, and state prerequisites (separating hard
+  contract dependencies from mergeable shared-file overlaps), run downstream
+  read-only feasibility probes and contract derivations upfront in parallel
+  against `main`, dispatch every ready interior or leaf frontier node, and
+  recompute the frontier with `git merge-base --is-ancestor` checks whenever
+  `main` advances.
+
 ## 0.1.0 (2026-11-16)
 
 - Initial MIT release of agrein (ag + rein, *“a grain”*) for Codex, Claude Code,

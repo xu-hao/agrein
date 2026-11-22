@@ -18,16 +18,28 @@ Verify `CHILD_NUMBER` appears in the epic's `sub_issues` list before handing the
 ticket to a worker. A cross-link, label, or Markdown task list does not create a
 native parent relationship.
 
-## Recording epic execution order
+## Recording the epic dependency DAG
 
-Summarize three buckets in the epic body or tracking note before dispatching:
+Summarize three buckets in the epic body or tracking note before dispatching,
+derived from actual contract, code, and state prerequisites rather than prose
+list position:
 
-- **Foreground sequential work:** investigations, probes, or tickets that settle
-  a shared contract or product rule.
-- **Ready parallel leaves:** fully specified, decision-free children with no
-  unresolved dependencies.
-- **Blocked dependents:** children waiting on a named sibling ticket or owner
-  ruling.
+- **Upfront read-only probes & foreground rulings:** read-only feasibility probes
+  and canonical-contract derivations runnable immediately in parallel against
+  `main` while upstream code builds, vs. unsettled product or policy rulings
+  handled sequentially in the foreground.
+- **Ready DAG frontier:** interior and leaf subtickets whose upstream contract
+  and code prerequisites are on `main` and whose product decisions are settled
+  (treating disjoint edits to a shared index, schema, or registry file as
+  mergeable rather than blocking edges).
+- **Blocked downstream nodes:** subtickets waiting on named prerequisite edges
+  (upstream contract/code tickets or unsettled owner rulings), never merely a
+  later slot in a narrative `A -> B -> C` list.
+
+Whenever `main` advances, recompute these buckets to promote newly unblocked
+frontier nodes and check commit ancestry (`git merge-base --is-ancestor` against
+`origin/main`) so tickets already landed on `main` are closed and cleaned up
+promptly.
 
 ## Dedicated worker brief checklist
 
@@ -40,7 +52,9 @@ Provide every subticket worker with a self-contained brief covering:
 - **Isolation namespace:** exact worktree, branch, environment, log, and scratch
   prefix to use under [ticket-delivery](../../ticket-delivery/SKILL.md).
 - **End-to-end ownership:** updating its ticket, running repository gates,
-  opening and landing its PR (`Closes #42`), and cleaning merged artifacts.
+  opening and landing its PR (`Closes #42`), and cleaning merged artifacts (or
+  reporting read-only findings and candidate rulings only, when scoped to an
+  upfront probe).
 - **Bounds & authorization:** finite retry count and parking conditions for
   infrastructure outages, plus any live-operation approvals explicitly granted
   under [owner-escalation](../../owner-escalation/SKILL.md).

@@ -12,12 +12,14 @@ operational detail into progressive references:
 - [Worktrees and cleanup](https://github.com/xu-hao/agrein/blob/main/skills/ticket-delivery/references/worktrees-and-cleanup.md)
   covers ticket-scoped isolation paths, full-log capture, and squash-safe cleanup.
 - [epic-queue](https://github.com/xu-hao/agrein/blob/main/skills/epic-queue/SKILL.md)
-  wires native GitHub parent/sub-issue relationships, triages the full queue
-  upfront to batch owner questions, runs uncertain or ruling-bearing tickets
-  sequentially in the foreground, and dispatches decision-free subtickets to
-  dedicated workers with delta-only handbacks.
+  wires native GitHub parent/sub-issue relationships, derives an explicit
+  dependency DAG upfront to batch owner questions, runs read-only feasibility
+  probes and contract derivations in parallel against `main` while serializing
+  owner rulings, and dispatches every ready DAG frontier node (interior or leaf)
+  to dedicated workers with delta-only handbacks.
 - [Native GitHub sub-issues and worker briefs](https://github.com/xu-hao/agrein/blob/main/skills/epic-queue/references/github-sub-issues.md)
-  shows numeric `.id` attachment, queue buckets, and worker brief fields.
+  shows numeric `.id` attachment, dependency DAG frontier buckets, `main`-advance
+  ancestry checks, and worker brief fields.
 - [bug-investigation](https://github.com/xu-hao/agrein/blob/main/skills/bug-investigation/SKILL.md)
   measures and reproduces defects before editing, steps back to the general
   problem class, proves pre-existing failure claims against `origin/main`, fixes
@@ -59,8 +61,9 @@ scheduler, add a GitHub integration, or grant new permissions.
 Native epic relationships need GitHub access. Dedicated workers need a host with
 subagent support. If a capability is missing, report it and settle an alternative
 execution plan. Do not claim native parenting or delegation happened without it.
-An assigned leaf worker executes its own ticket directly. Fully specified children
-can run concurrently; ruling-bearing investigations run sequentially in the foreground.
+An assigned leaf worker executes its own ticket directly. Ready DAG frontier
+nodes and upfront read-only probes can run concurrently; unsettled owner rulings
+run sequentially in the foreground.
 
 Explicit owner instructions and canonical project contracts govern execution.
 Read-only work, ticket maintenance, and workstation setup need no change ticket.
