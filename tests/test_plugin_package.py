@@ -34,7 +34,7 @@ def test_manifest_contract(manifest):
     data = load_json(ROOT / manifest)
     assert isinstance(data, dict)
     assert data["name"] == "agrein"
-    assert data["version"] == "0.1.0"
+    assert data["version"] == "0.1.1"
     assert re.fullmatch(r"\d+\.\d+\.\d+", data["version"])
     assert isinstance(data["description"], str) and data["description"].strip()
     assert data["author"] == {"name": "agrein contributors"}

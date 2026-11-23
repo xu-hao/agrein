@@ -1,6 +1,6 @@
 {
   "name": "agrein",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Contributor workflows for isolated ticket delivery, native epic queues, bug investigation, and concrete owner escalations.",
   "author": {
     "name": "agrein contributors"

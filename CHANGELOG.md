@@ -2,13 +2,18 @@
 
 ## Unreleased
 
+## 0.1.1 (2026-11-22)
+
 - Update `epic-queue` and its GitHub sub-issue reference to derive explicit
   dependency DAGs from contract, code, and state prerequisites (separating hard
   contract dependencies from mergeable shared-file overlaps), run downstream
   read-only feasibility probes and contract derivations upfront in parallel
   against `main`, dispatch every ready interior or leaf frontier node, and
   recompute the frontier with `git merge-base --is-ancestor` checks whenever
-  `main` advances.
+  `main` advances (`#7`).
+- Onboard `gardenia` managed `AGENTS.md` workflow block and `gardenia.toml`
+  repository profile while preserving `agrein`-specific plugin contracts
+  outside the managed markers (`#5`).
 
 ## 0.1.0 (2026-11-16)
 
