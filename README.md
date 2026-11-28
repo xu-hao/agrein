@@ -35,8 +35,8 @@ See [Quickstart](docs/quickstart.md) for invocation and lifecycle commands.
 | Skill | Workflow |
 | --- | --- |
 | [ticket-delivery](skills/ticket-delivery/SKILL.md) | Issues before changes, isolated per-ticket worktrees, complete-log behavioral verification, guarded PR landing (`Closes #N`), squash-safe `git cherry` cleanup, and concise handoffs |
-| [epic-queue](skills/epic-queue/SKILL.md) | Native GitHub parent/sub-issue relationships, explicit dependency DAG derivation, parallel upfront read-only probes, foreground rulings, ready-frontier subagent dispatch, and delta-only updates |
-| [bug-investigation](skills/bug-investigation/SKILL.md) | Evidence-first reproduction, general problem-class diagnosis, `origin/main` proof for pre-existing failures, producer fixes over consumer fallbacks, and failing behavioral tests first |
+| [epic-queue](skills/epic-queue/SKILL.md) | Native GitHub parent/sub-issue relationships, explicit dependency DAG derivation, pre-dispatch bug-burst root-cause clustering, parallel upfront read-only probes, foreground rulings, ready-frontier subagent dispatch, and delta-only updates |
+| [bug-investigation](skills/bug-investigation/SKILL.md) | Bug-burst root-cause clustering before dispatch, evidence-first reproduction, general problem-class diagnosis, `origin/main` proof for pre-existing failures, producer fixes over consumer fallbacks, and failing behavioral tests first |
 | [owner-escalation](skills/owner-escalation/SKILL.md) | Product/policy vs. engineering boundary, standalone jargon-free before/after single-select rulings, explicit per-operation live approval gates, and four-section decision handoffs |
 
 Invoke `$<skill-name>` in Codex, `/agrein:<skill-name>` in Claude Code, or

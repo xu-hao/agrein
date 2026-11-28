@@ -118,6 +118,46 @@ def test_skill_and_reference_relative_links_resolve(document):
         assert target.is_file(), f"Broken link from {document} to {target}"
 
 
+# Workflow hand-offs between skills and progressive references, as parsed links.
+SKILL_LINK_GRAPH = {
+    "ticket-delivery": {
+        "epic-queue", "bug-investigation", "owner-escalation",
+        "references/worktrees-and-cleanup.md",
+    },
+    "epic-queue": {
+        "bug-investigation", "owner-escalation", "ticket-delivery",
+        "references/github-sub-issues.md",
+    },
+    "bug-investigation": {"owner-escalation", "ticket-delivery"},
+    "owner-escalation": {"ticket-delivery", "references/worked-rulings-and-gates.md"},
+}
+
+
+def skill_link_edges(skill):
+    folder = ROOT / "skills" / skill
+    edges = set()
+    for target in relative_targets(folder / "SKILL.md"):
+        if target.name == "SKILL.md" and target.parent.parent == ROOT / "skills":
+            edges.add(target.parent.name)
+        else:
+            edges.add(target.relative_to(folder).as_posix())
+    return edges
+
+
+@pytest.mark.parametrize("skill", sorted(SKILLS))
+def test_skill_hand_off_and_reference_links_are_preserved(skill):
+    assert skill_link_edges(skill) == SKILL_LINK_GRAPH[skill]
+
+
+@pytest.mark.parametrize("skill", sorted(SKILLS))
+def test_every_progressive_reference_is_reachable_from_its_skill(skill):
+    folder = ROOT / "skills" / skill
+    references = {
+        path.relative_to(folder).as_posix() for path in folder.glob("references/*.md")
+    }
+    assert references <= skill_link_edges(skill)
+
+
 def test_markdown_link_check_observes_missing_files_and_ignores_code(tmp_path):
     document = tmp_path / "SKILL.md"
     document.write_text("[Missing](references/not%20here.md)\n\n```text\n[x](fake.md)\n```\n")
