@@ -56,7 +56,9 @@ operation approvals, and decision handoffs. An assigned leaf worker implements
 its ticket directly without recursively delegating it.
 ```
 
-Installation makes the workflows discoverable; this snippet requests their use.
+The same text ships as [AGENTS.snippet.md](AGENTS.snippet.md) for copying or
+scripted bootstrapping. Installation makes the workflows discoverable; this
+snippet requests their use.
 It does not grant deployment/release authority or make unavailable subagent tools
 available. The [skill guide](docs/skills.md) describes these boundaries.
 

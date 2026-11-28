@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Ship the concise trigger-only `AGENTS.md` instruction as a canonical root
+  `AGENTS.snippet.md`; the quickstart includes it directly, tests keep it
+  byte-identical to the `README.md` snippet, and the strict Antigravity payload
+  check validates it alongside the skills (`#20`).
 - Add pre-dispatch bug-burst root-cause clustering to `bug-investigation` and
   `epic-queue`: when several bug or regression tickets arrive together, run a
   bounded failure-signature and code-path cause check before fanning out workers,
