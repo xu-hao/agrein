@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Add pre-dispatch bug-burst root-cause clustering to `bug-investigation` and
+  `epic-queue`: when several bug or regression tickets arrive together, run a
+  bounded failure-signature and code-path cause check before fanning out workers,
+  grouping shared-cause symptoms under one root-cause fix and linking recurrences
+  instead of dispatching parallel symptom patches (`#19`).
+- Compact the `ticket-delivery`, `epic-queue`, `bug-investigation`, and
+  `owner-escalation` workflow prose while preserving every rule and link, and
+  test the cross-skill hand-off link graph and reference reachability (`#19`).
+
 ## 0.1.1 (2026-11-22)
 
 - Update `epic-queue` and its GitHub sub-issue reference to derive explicit

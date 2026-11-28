@@ -13,18 +13,20 @@ operational detail into progressive references:
   covers ticket-scoped isolation paths, full-log capture, and squash-safe cleanup.
 - [epic-queue](https://github.com/xu-hao/agrein/blob/main/skills/epic-queue/SKILL.md)
   wires native GitHub parent/sub-issue relationships, derives an explicit
-  dependency DAG upfront to batch owner questions, runs read-only feasibility
-  probes and contract derivations in parallel against `main` while serializing
-  owner rulings, and dispatches every ready DAG frontier node (interior or leaf)
+  dependency DAG upfront to batch owner questions, clusters bug bursts by root
+  cause before dispatch, runs read-only feasibility probes and contract
+  derivations in parallel against `main` while serializing owner rulings, and
+  dispatches every ready DAG frontier node (interior or leaf)
   to dedicated workers with delta-only handbacks.
 - [Native GitHub sub-issues and worker briefs](https://github.com/xu-hao/agrein/blob/main/skills/epic-queue/references/github-sub-issues.md)
   shows numeric `.id` attachment, dependency DAG frontier buckets, `main`-advance
   ancestry checks, and worker brief fields.
 - [bug-investigation](https://github.com/xu-hao/agrein/blob/main/skills/bug-investigation/SKILL.md)
-  measures and reproduces defects before editing, steps back to the general
-  problem class, proves pre-existing failure claims against `origin/main`, fixes
-  invalid internal producers rather than consumer fallbacks, and locks in a
-  failing behavioral test first.
+  clusters simultaneous bug tickets by failure signature and code path before
+  dispatching fixes, measures and reproduces defects before editing, steps back
+  to the general problem class, proves pre-existing failure claims against
+  `origin/main`, fixes invalid internal producers rather than consumer
+  fallbacks, and locks in a failing behavioral test first.
 - [owner-escalation](https://github.com/xu-hao/agrein/blob/main/skills/owner-escalation/SKILL.md)
   reserves owner prompts for unsettled product/policy rules, presents standalone
   jargon-free choices with exact before/after states and option costs, enforces
