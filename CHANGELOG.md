@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Ship the concise trigger-only `AGENTS.md` instruction as a canonical root
+  `AGENTS.snippet.md`; the quickstart includes it directly, tests keep it
+  byte-identical to the `README.md` snippet, and the strict Antigravity payload
+  check validates it alongside the skills (`#20`).
+
 ## 0.1.1 (2026-11-22)
 
 - Update `epic-queue` and its GitHub sub-issue reference to derive explicit
