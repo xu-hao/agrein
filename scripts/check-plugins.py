@@ -42,12 +42,13 @@ def main():
 
     # The checkout includes portable metadata and contributor instructions that
     # Antigravity intentionally ignores. Check its exact host payload strictly.
-    # Copy only these directories: CLAUDE.md -> AGENTS.md stays untouched in the
+    # Copy only these paths: CLAUDE.md -> AGENTS.md stays untouched in the
     # checkout and is never copied as a dangling symlink into the host payload.
     with tempfile.TemporaryDirectory(prefix=f"{ROOT.name}-native-plugin-") as directory:
         payload = Path(directory)
         shutil.copytree(ROOT / ".antigravity-plugin", payload / ".antigravity-plugin")
         shutil.copytree(ROOT / "skills", payload / "skills")
+        shutil.copy2(ROOT / "AGENTS.snippet.md", payload / "AGENTS.snippet.md")
         validate_agy(payload, strict=True)
     print("Verified Claude manifests and Antigravity checkout/exact payload; no installs")
 

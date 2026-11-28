@@ -37,15 +37,11 @@ user/project scope with the host's supported options. Reopen the agent if needed
 
 Requesting a workflow does not grant permission for a release or deployment.
 
-Add this trigger to the consuming project's `AGENTS.md`, or its native equivalent:
+Add this trigger, shipped as the repository's root `AGENTS.snippet.md`, to the
+consuming project's `AGENTS.md`, or its native equivalent:
 
-```text
-Use the installed agrein skills: ticket-delivery before changing code, docs,
-config, infrastructure, or live state; epic-queue when decomposing multi-ticket
-work or coordinating subagent workers; bug-investigation before fixing defects or
-failing checks; and owner-escalation for unsettled product/policy rulings, live
-operation approvals, and decision handoffs. An assigned leaf worker implements
-its ticket directly without recursively delegating it.
+```{literalinclude} ../AGENTS.snippet.md
+:language: text
 ```
 
 ## Inspect and remove

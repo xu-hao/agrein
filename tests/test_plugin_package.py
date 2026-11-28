@@ -126,6 +126,37 @@ def test_markdown_link_check_observes_missing_files_and_ignores_code(tmp_path):
     assert not targets[0].exists()
 
 
+SNIPPET = ROOT / "AGENTS.snippet.md"
+
+
+def fences(document, info):
+    tokens = MarkdownIt().parse(document.read_text(encoding="utf-8"))
+    return [token for token in tokens if token.type == "fence" and token.info == info]
+
+
+def test_agents_snippet_is_concise_and_matches_readme_byte_for_byte():
+    assert SNIPPET.is_file() and not SNIPPET.is_symlink()
+    raw = SNIPPET.read_bytes()
+    text = raw.decode("utf-8")
+    assert text.strip()
+    # Concise trigger only: detailed workflow steps belong in skills/*/SKILL.md.
+    assert text.endswith("\n") and not text.startswith(("\n", " "))
+    assert len(text.splitlines()) <= 10 and len(raw) <= 800
+    # Paste-ready: no HTML comment (managed block) delimiters.
+    assert "<!--" not in text and "-->" not in text
+    readme = fences(ROOT / "README.md", "text")
+    assert len(readme) == 1
+    assert readme[0].content.encode("utf-8") == raw
+
+
+def test_quickstart_includes_canonical_agents_snippet():
+    quickstart = ROOT / "docs" / "quickstart.md"
+    assert fences(quickstart, "text") == []
+    (include,) = fences(quickstart, "{literalinclude} ../AGENTS.snippet.md")
+    assert include.content == ":language: text\n"
+    assert (quickstart.parent / "../AGENTS.snippet.md").resolve() == SNIPPET
+
+
 def test_contributor_symlink_resolves_to_canonical_instructions():
     link = ROOT / "CLAUDE.md"
     assert link.is_symlink()
@@ -154,7 +185,11 @@ if host == "claude":
 assert args[:2] == ["plugin", "validate"]
 assert args[-1] == "--json"
 if strict:
-    assert set(p.name for p in root.iterdir()) == {".antigravity-plugin", "skills"}
+    assert set(p.name for p in root.iterdir()) == {
+        ".antigravity-plugin", "skills", "AGENTS.snippet.md"
+    }
+    snippet = root / "AGENTS.snippet.md"
+    assert snippet.read_bytes() == (Path.cwd() / "AGENTS.snippet.md").read_bytes()
     assert (root / ".antigravity-plugin" / "plugin.json").is_file()
     assert {p.parent.name for p in root.glob("skills/*/SKILL.md")} == {
         "ticket-delivery",
@@ -190,7 +225,7 @@ def native_check(tmp_path):
     package.mkdir()
     for folder in ("skills", ".agents", ".claude-plugin", ".antigravity-plugin", "scripts"):
         shutil.copytree(ROOT / folder, package / folder)
-    for file in ("plugin.json", "AGENTS.md"):
+    for file in ("plugin.json", "AGENTS.md", "AGENTS.snippet.md"):
         shutil.copy2(ROOT / file, package / file)
     (package / "CLAUDE.md").symlink_to("AGENTS.md")
     binaries = tmp_path / "bin"
@@ -201,7 +236,9 @@ def native_check(tmp_path):
         binary.chmod(0o755)
     log = tmp_path / "native-calls.jsonl"
 
-    def run(case):
+    def run(case, *, without=()):
+        for name in without:
+            (package / name).unlink()
         env = {
             **os.environ,
             "PATH": str(binaries) + os.pathsep + os.environ["PATH"],
@@ -241,3 +278,10 @@ def test_native_check_rejects_failed_or_inconsistent_validations(native_check, c
     result, calls = native_check(case)
     assert result.returncode != 0
     assert len(calls) == call_count
+
+
+def test_native_check_fails_without_agents_snippet_before_strict_validation(native_check):
+    result, calls = native_check("success", without=("AGENTS.snippet.md",))
+    assert result.returncode != 0
+    assert "AGENTS.snippet.md" in result.stderr
+    assert [call["host"] for call in calls] == ["claude", "agy"]
